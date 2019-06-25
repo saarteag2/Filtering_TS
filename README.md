@@ -8,12 +8,12 @@ Required Arguments:
    ##### Single Transmission Summary File Arguments
    1. **--input_db**: absolute path to input transmission summary file
    2. **--output_dir**: absolute path to desired output directory
-   3. **--input_type**: specify transmission summary input format as either: per_chr or multi_chr (see details below) <br/>
+   3. **--input_type**: specify transmission summary input format as either: (per_chr or multi_chr, see details below) <br/>
    4. **--flat_or_family**: specify whether input is a flat or family aggregate transmission summary file: family or flat
    
    ##### Multiple Transmission Summary Files within a single directory
    1. **--input_db**: absolute path to directory with multiple transmission summary files
-   2. **--input_prefix**: string preceeding chromosome specification and shard number
+   2. **--input_prefix**: string preceding chromosome specification (and shard number if present)
      
       * Example 1: <br/>
       Filename: Transmission_Summary_chr1_annotation.db <br/>
@@ -23,7 +23,7 @@ Required Arguments:
       Filename: Transmission_Summary_chr1_00000_annotation.db <br/>
       Prefix: Transmission_Summary_chr
     
-   3. **--input_suffix**: string following chromosome specification 
+   3. **--input_suffix**: string following chromosome specification (and shard number if present) 
      
       * Example 1: <br/>
       Filename: Transmission_Summary_chr1_annotation.db <br/>
@@ -34,7 +34,7 @@ Required Arguments:
       Prefix: _annotation.db
       
    3. **--output_dir**: absolute path to desired output directory
-   3. **--input_type**: specify transmission summary input format as either: per_chr or chr_shards (see details below) <br/>
+   3. **--input_type**: specify transmission summary input format as either: (per_chr or chr_shards, see details below) <br/>
    4. **--flat_or_family**: specify whether input is a flat or family aggregate transmission summary file: flat or family
    
 Optional Arguments:
@@ -47,19 +47,19 @@ Optional Arguments:
 Input and Output Formats:
 -----------
 The wrapper script accepts transmission summary files in three formats: per_chr, multi_chr, and chr_shards (see below for details)
-![Transmission Summary Input formats and input_type](https://imgur.com/3CcAyC7.png)
+![Transmission Summary Input formats and input_type](https://imgur.com/jlXZgNH.png)
 
 Input in multi_chr format are preprocessed by the script and divided into per chromosome shards in a directory named "filtered_flat_per_chr_shards" or "filtered_family_per_chr_shards" within the user specified output directory (see below).
-![Preprocessing Step](https://imgur.com/6JrvX3y.png)
+![Preprocessing Step](https://imgur.com/zrk71Hm.png)
 
 The wrapper script also allows the user to specify their desired filtering output format by using the --comb_and_clean argument to select: merge_all_chr (Default), merge_by_chr, or no_comb_clean (see details below).
-![Combine and Clean Options](https://imgur.com/FFVUGjg.png)
+![Combine and Clean Options](https://imgur.com/eRqXKbU.png)
 
 Example Commands:
 -----------
 Filtering is most commonly conducted on single, per_chr transmission summary files and on multiple, chr_shard files. Example commands for these most common filtering wrapper script provided first below, followed by the less common single, multi_chr and multiple, per_chr use cases.
 
-#### Individual File Example: per_chr
+#### Individual File Example (per_chr)
 ---
 **General Command**:
 ```
@@ -88,7 +88,7 @@ Chr   Position Endpos   Ref   Alt   esp6500siv2_all   ExAC_ALL 1000g2015aug_all 
 1  10492 NA C  T  NA NA NA NA 0.99208  10.62 NA NA NA NA upstream_gene_variant   DDX11L1  ABCDEF   ABCDEF102   1  uncertain   PASS;ABHet=0.734;ABHom=0.953;AC=1095;AF=0.119;AN=9170;BaseQRankSum=-9.500e-01;DP=151995;FS=1.412;GC=95.24;GQ_MEAN=56.05;GQ_STDDEV=42.80;InbreedingCoeff=-0.1477;MLEAC=1158;MLEAF=0.126;MQ=53.11;MQ0=0;MQRankSum=0.043;NCC=25;NDA=1;OND=5.382e-03;QD=3.83;ReadPosRankSum=0.00;SOR=0.445;VQSLOD=-5.762e+00;VariantType=SNP;culprit=MQ;cytoBand=1p36.33;Func=intergenic;Gene=NONE,DDX11L1;GeneDetail=NONE,dist=1377;genomicSuperDups=0.993729,chr9:10843;CADD=0.992080;CADD_Phred=10.62;FATHMM_c=0.73423;FATHMM_nc=0.05648;GWAVA_region=0.4;GWAVA_tss=0.26;GWAVA_unmatched=182;CSQ=T|upstream_gene_variant|MODIFIER|DDX11L1|ENSG00000223972|Transcript|ENST00000456328|processed_transcript||||||||||rs55998931|1377|1|SNV|HGNC|37102|YES|||||||||||||||||||||||||||||||||||||||||  0/0   .:23,0:23:0:.:.:0,0,36  GT:AB:AD:DP:GQ:PGT:PID:PL  0.0811632   0.120671284 0  0.004794885 0.527704485 0.687830688 NA 1  DDX11L1  ambiguous_previous   NA NA NA NA NA NA NA NA NA NA NA NA 0.4   0.147540984 0.00192864  0.096339114 8.12E-02
 ```
 
-#### Multiple Files Example: chr_shards
+#### Multiple Files Example (chr_shards)
 ---
 
 **Input Files Within Subdirectory of input_dir**:
@@ -273,7 +273,7 @@ Chr   Position Endpos   Ref   Alt   esp6500siv2_all   ExAC_ALL 1000g2015aug_all 
 1  10492 NA C  T  NA NA NA NA 0.99208  10.62 NA NA NA NA upstream_gene_variant   DDX11L1  ABCDEF   ABCDEF101   1  uncertain   PASS;ABHet=0.734;ABHom=0.953;AC=1095;AF=0.119;AN=9170;BaseQRankSum=-9.500e-01;DP=151995;FS=1.412;GC=95.24;GQ_MEAN=56.05;GQ_STDDEV=42.80;InbreedingCoeff=-0.1477;MLEAC=1158;MLEAF=0.126;MQ=53.11;MQ0=0;MQRankSum=0.043;NCC=25;NDA=1;OND=5.382e-03;QD=3.83;ReadPosRankSum=0.00;SOR=0.445;VQSLOD=-5.762e+00;VariantType=SNP;culprit=MQ;cytoBand=1p36.33;Func=intergenic;Gene=NONE,DDX11L1;GeneDetail=NONE,dist=1377;genomicSuperDups=0.993729,chr9:10843;CADD=0.992080;CADD_Phred=10.62;FATHMM_c=0.73423;FATHMM_nc=0.05648;GWAVA_region=0.4;GWAVA_tss=0.26;GWAVA_unmatched=182;CSQ=T|upstream_gene_variant|MODIFIER|DDX11L1|ENSG00000223972|Transcript|ENST00000456328|processed_transcript||||||||||rs55998931|1377|1|SNV|HGNC|37102|YES|||||||||||||||||||||||||||||||||||||||||  0/0   .:23,0:23:0:.:.:0,0,36  GT:AB:AD:DP:GQ:PGT:PID:PL  0.0811632   0.120671284 0  0.004794885 0.527704485 0.687830688 NA 1  DDX11L1  ambiguous_previous   NA NA NA NA NA NA NA NA NA NA NA NA NA 0.147540984 0.00192864  0.096339114 8.12E-02
 ```
 
-#### Individual File Example: multi_chr
+#### Individual File Example (multi_chr)
 ---
 **General Command**:
 ```
@@ -348,7 +348,7 @@ Chromosome 3 Output File: 3/Transmission_Summary_Flat_multi_chr_annotated_for_an
 3  60082 NA G  A  NA NA NA NA NA NA NA NA NA NA intergenic_variant   NA ABCDEF   ABCDEF102   1  uncertain   PASS;ABHet=0.556;AC=2;AF=2.169e-04;AN=9220;BaseQRankSum=-2.890e-01;DP=58911;FS=0.000;GC=38.10;GQ_MEAN=37.95;GQ_STDDEV=12.17;InbreedingCoeff=-0.0017;MLEAC=2;MLEAF=2.169e-04;MQ=50.28;MQ0=0;MQRankSum=1.84;NCC=0;NDA=1;QD=6.89;ReadPosRankSum=0.361;SOR=1.329;VQSLOD=-1.253e+01;VariantType=SNP;culprit=MQ;cytoBand=3p26.3;Func=intergenic;Gene=NONE,AY269186.1;GeneDetail=NONE,dist=5349;genomicSuperDups=0.95747,chr3:75279192;FATHMM_c=0.07045;FATHMM_nc=0.00765;CSQ=A|intergenic_variant|MODIFIER||||||||||||||||||SNV||||||||||||||||||||||||||||||||||||||||||||   0/0   .:6,0:6:18:0,18,193  GT:AB:AD:DP:GQ:PL 4.92E-05 0.00026455  NA 0  NA 0  NA 5  NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA 4.92E-05
 ```
 
-#### Multiple Files Example: per_chr
+#### Multiple Files Example (per_chr)
 ---
 **General Command**:
 ```
