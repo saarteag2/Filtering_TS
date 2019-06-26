@@ -30,14 +30,16 @@ These scripts enable the annotation and subsequent filtering of transmission sum
     1. filter_flat_annotated_transmission_summary.py
     2. filter_family_aggregation_annotated_transmission_summary.py
 
-4. **ANALYSIS BASED FILTERING**: Filter annotated flat and family aggregation transmission summary files from shards and recombine shards into one file. <br/>
+4. **ANALYSIS BASED FILTERING**: Filter annotated flat and family aggregation transmission summary files from shards and recombine shards into desired output format. <br/>
    1. filter_annotated_transmission_summary_qsub.sh #Most efficent for first large filtering step of main projects on bmap.
    2. combine_and_clean.sh #source code at the end of filter_annotated_transmission_summary_qsub.sh to give you a single filtered output file.
    3. Filtering_Wrapper_Script.sh #Most efficent for first large filtering step of single file or multiple input files. <br/>
    4. combine_and_clean_script.sh #source code within Filtering_Wrapper_Script.sh to give you requested output type. <br/>
 
-## 3. Overview of analysis based filtering scripts:
-Two Input Types
+## 3. Overview of analysis based filtering script:
+Filtering can be conducted for the two types of transmission summary files: flat and family aggregation. These types of transmission summary files can categorized into three input types depending on its file contents: per_chr, multi_chr, and chr_shards (see details below). The transmission summary files can also be combined into one input file or divided into multiple input files. The Filtering_Wrapper_Script.sh has been designed to handle the multiple transmission summary input cases and is recommended for as the main filtering script to be used. Functionality for this script and examples of its many input cases are provided below.
+
+Two Format Types
 -----------
   1. Single Transmission Summary File
   2. Multiple Transmission Summary Files within a single directory
